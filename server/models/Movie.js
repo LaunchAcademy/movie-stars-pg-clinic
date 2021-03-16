@@ -6,60 +6,12 @@ const pool = new pg.Pool({
 
 class Movie {
   static async findAll() {
-    try {
-      const client  = await pool.connect()
-      const result = await client.query('SELECT * FROM movies')
-      
-      // console.log("RESULTS")
-      // console.log(result)
-      // console.log("RESULT ROWS")
-      // console.log(result.rows)
-      client.release()
-
-      const movies = result.rows
-      return movies
-    } catch (error) {
-      console.error(`Error: ${error}`)
-      pool.end()
-    }
+    return "This should query all the movies and return them."
   }
-  
+
   static async findById(id) {
-    try {
-      const client = await pool.connect()
-      // const result = await client.query('SELECT * FROM movies WHERE id = $1', [id])
-      const result = await client.query(`SELECT * FROM movies WHERE id = ${id} LIMIT 1;`)
-      
-      console.log(result)
-      console.log(result.rows)
-      client.release()
-      
-      const movie = result.rows[0]
-      return movie
-    } catch (error) {
-      console.error(`Error: ${error}`)
-      pool.end()
-    }
+    return "This should query the movie with the provided id and return it."
   }
-
-  // not fully tested!
-  // static async findWhere(id) {
-  //   try {
-  //     const client = await pool.connect()
-  //     const title = 'Star Wars'
-  //     const result = await client.query(`SELECT * FROM movies WHERE title = '${title}'`)
-      
-  //     // console.log(result)
-  //     console.log(result.rows)
-  //     client.release()
-      
-  //     const movie = result.rows
-  //     return movie
-  //   } catch (error) {
-  //     console.error(`Error: ${error}`)
-  //     pool.end()
-  //   }
-  // }
 }
 
 export default Movie
